@@ -1,0 +1,47 @@
+/* src/components/SplashScreen.css */
+.splash-screen {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.splash-screen h1 {
+  font-size: 2.5rem; /* Adjust size as needed */
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add a subtle shadow for better readability */
+  margin-bottom: 20px; /* Space between title and countdown */
+}
+
+.countdown {
+  font-size: 4rem; /* Make the countdown larger */
+  font-weight: bold;
+  color: #fff; /* Countdown color */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add shadow for readability */
+  animation: zoomIn 0.5s ease-in-out; /* Add animation to the countdown */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

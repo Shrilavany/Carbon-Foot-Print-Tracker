@@ -1,0 +1,72 @@
+.dashboard-container {
+  padding: 2rem;
+  background-color: #f0f4f8;
+  font-family: Arial, sans-serif;
+}
+
+.dashboard-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.dashboard-title {
+  color: #00796b;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.day-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.day-input {
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h3 {
+  color: #00796b;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.page-button {
+  background-color: #06721c;
+  border: none;
+  border-radius: 5px;
+  margin: 0 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  position: relative; /* To position the underline */
+}
+
+.page-button.active {
+  background-color: #007bff;
+  color: white;
+  transform: scale(1.1); /* Slightly enlarge the active page button */
+}
+
+.page-button.active::after {
+  content: "";
+  display: block;
+  height: 2px;
+  background-color: #007bff;
+  position: absolute;
+  bottom: -5px; /* Adjust as needed */
+  left: 0;
+  right: 0;
+}
+
+.page-button:hover {
+  background-color: #e0e0e0;
+}

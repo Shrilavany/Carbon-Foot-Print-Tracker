@@ -1,0 +1,62 @@
+/* About.css */
+
+/* Background color for the entire About section */
+.About {
+  text-align: center;
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #ffffff; /* White background for clarity */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  font-family: Arial, sans-serif;
+}
+
+/* Styling for the heading */
+.About h1 {
+  color: #2c3e50; /* Dark grayish-blue for readability and professionalism */
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+/* Styling for paragraphs */
+.About p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #34495e; /* Slightly lighter grayish-blue for text */
+  margin-bottom: 1.5rem;
+}
+
+/* Additional styling for the last paragraph */
+.About p:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Styling for the back button */
+.back-button {
+  background-color: #007bff; /* Blue background to match the nav bar */
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  margin-top: 2rem; /* Space from the content above */
+}
+
+.back-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Responsive design adjustments for smaller screens */
+@media (max-width: 768px) {
+  .About h1 {
+    font-size: 2rem;
+  }
+
+  .About p {
+    font-size: 1rem;
+  }
+}

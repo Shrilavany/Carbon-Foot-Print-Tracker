@@ -1,0 +1,86 @@
+/* Profile.css */
+
+.profile-page {
+  padding: 2rem;
+  background: #e0f7fa; /* Light blue background */
+  font-family: Arial, sans-serif;
+  min-height: 100vh; /* Ensure full viewport height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-page h1 {
+  color: #00796b; /* Teal color for heading */
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.profile-info {
+  background: #ffffff; /* White background for profile info */
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+  max-width: 600px;
+  width: 100%;
+  position: relative; /* Position relative for absolute positioning of image */
+}
+
+/* Styling for profile image upload area */
+.profile-image-upload {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.profile-image-upload label {
+  cursor: pointer;
+}
+
+.profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%; /* Circular profile image */
+  object-fit: cover; /* Ensure image covers the circle */
+  border: 3px solid #00796b; /* Teal border around the image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.profile-info p {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.5; /* Improve readability */
+}
+
+.profile-info strong {
+  color: #00796b; /* Matching teal color */
+}
+
+.profile-info .profile-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.profile-info .profile-item {
+  margin-bottom: 1rem;
+}
+
+.profile-info .profile-item:last-child {
+  margin-bottom: 0; /* Remove bottom margin for last item */
+}
+
+.profile-info .edit-button {
+  background-color: #00796b; /* Teal background for edit button */
+  color: #ffffff; /* White text */
+  border: none;
+  border-radius: 5px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.profile-info .edit-button:hover {
+  background-color: #004d40; /* Darker teal for hover effect */
+}

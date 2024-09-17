@@ -1,0 +1,110 @@
+/* src/components/DayInput.css */
+
+.day-input {
+  background: #ffffff; /* White background for each day input */
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  margin-bottom: 1rem;
+  position: relative; /* For positioning the autocomplete dropdown */
+}
+
+.day-input-title {
+  margin-bottom: 1rem;
+}
+
+.day-input-title h4 {
+  color: #00796b; /* Teal color for day title */
+  margin: 0;
+}
+
+.day-input-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+label {
+  font-size: 1rem;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+select,
+input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+select {
+  background-color: #f9f9f9;
+}
+
+input {
+  background-color: #ffffff;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #00796b; /* Teal button */
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.75rem;
+  transition: background-color 0.3s; /* Smooth color transition */
+}
+
+button:hover {
+  background-color: #004d40; /* Darker teal on hover */
+}
+
+.map-container {
+  margin-top: 1rem;
+}
+
+.map-container .leaflet-container {
+  height: 300px; /* Adjust map height as needed */
+  border-radius: 8px;
+}
+
+input[readOnly] {
+  background-color: #e0f7fa; /* Light blue background for read-only input */
+  color: #00796b;
+}
+
+/* Autocomplete styling */
+.location-search-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #ffffff;
+}
+
+.autocomplete-dropdown-container {
+  position: absolute;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: calc(100% - 2px); /* Match width with input */
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000; /* Ensure dropdown appears above other elements */
+}
+
+.suggestion-item {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
+}
