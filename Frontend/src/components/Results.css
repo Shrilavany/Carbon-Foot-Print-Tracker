@@ -1,9 +1,184 @@
-/* src/components/Results.css */
-.results {
+.results-container {
   width: 80%;
-  margin: auto;
+  margin: 20px auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+  position: relative;
+}
+
+/* Heading styles */
+.results-container h1 {
+  text-align: center;
+  color: #00796b;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Share text styling */
+.share-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.share-text {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Share buttons section styles */
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.react-share-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #ffffff;
+  border: 2px solid transparent;
+  transition: background-color 0.3s, transform 0.2s, border-color 0.2s;
+}
+
+.facebook-share-button {
+  background-color: #3b5998;
+  border-color: #2d4373; /* Darker border for Facebook */
+}
+
+.twitter-share-button {
+  background-color: #1da1f2;
+  border-color: #1a91da; /* Darker border for Twitter */
+}
+
+.linkedin-share-button {
+  background-color: #0077b5;
+  border-color: #005582; /* Darker border for LinkedIn */
+}
+
+.whatsapp-share-button {
+  background-color: #25d366;
+  border-color: #1da35a; /* Darker border for WhatsApp */
+}
+
+/* Hover effects for buttons */
+.react-share-button:hover {
+  opacity: 0.8; /* Slightly transparent on hover */
+  transform: scale(1.05); /* Slightly larger on hover */
+}
+
+/* Chart container styling */
+.chart-container {
+  margin-top: 2rem;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Vehicle images styling */
+.vehicle-images {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.vehicle-entry {
+  text-align: center;
+  max-width: 150px;
+}
+
+.vehicle-entry img {
+  width: 80px; /* Adjust width as needed */
+  height: 80px; /* Ensure height is the same as width */
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image covers the circle */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.vehicle-entry p {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Emissions styling */
+.emissions-section {
+  margin-top: 2rem;
+  padding: 20px;
+  background-color: #e8f5e9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.emissions-section h2 {
+  font-size: 1.5rem;
+  color: #388e3c;
+  margin-bottom: 1rem;
+}
+
+.emissions-section p {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .results-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .chart-container {
+    padding: 15px;
+  }
+
+  .vehicle-entry img {
+    width: 60px; /* Adjusted width for smaller screens */
+    height: 60px; /* Ensure height is the same as width */
+  }
+
+  .share-buttons {
+    flex-direction: column;
+  }
+
+  .react-share-button {
+    margin-bottom: 10px;
+  }
+}
+/* Next button styling */
+.next-button {
+  background-color: #00796b; /* Primary color */
+  color: #ffffff; /* Text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 20px; /* Vertical and horizontal padding */
+  font-size: 1rem; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s, transform 0.2s; /* Transition effects */
+  margin-top: 20px; /* Space above the button */
+  margin-left: 20px;
+}
+
+/* Hover effects for the Next button */
+.next-button:hover {
+  background-color: #005b52; /* Darker shade on hover */
+  transform: scale(1.05); /* Slightly larger on hover */
+}
+
+/* Responsive adjustments for the Next button */
+@media (max-width: 768px) {
+  .next-button {
+    width: 100%; /* Full width on smaller screens */
+  }
 }

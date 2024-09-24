@@ -1,6 +1,7 @@
 /* src/components/DayInput.css */
 
-.day-input {
+/* Container for the day input form */
+.day-input-container {
   background: #ffffff; /* White background for each day input */
   padding: 1rem;
   border-radius: 8px;
@@ -9,36 +10,42 @@
   position: relative; /* For positioning the autocomplete dropdown */
 }
 
+/* Title of the day input form */
 .day-input-title {
   margin-bottom: 1rem;
 }
 
-.day-input-title h4 {
+.day-input-title h2 {
   color: #00796b; /* Teal color for day title */
   margin: 0;
+  font-size: 1.5rem; /* Slightly larger title font */
 }
 
-.day-input-fields {
+/* Container for form fields */
+.form-container {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
 label {
-  font-size: 1rem;
+  font-size: 1.1rem; /* Slightly larger font for better readability */
   color: #333;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  padding: 0.25rem 0; /* Add padding for better spacing */
 }
 
+/* Styles for select and input fields */
 select,
 input {
-  padding: 0.5rem;
+  padding: 0.75rem; /* Slightly more padding for better usability */
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
   width: 100%;
+  transition: border-color 0.3s; /* Smooth transition for focus */
 }
 
 select {
@@ -49,6 +56,7 @@ input {
   background-color: #ffffff;
 }
 
+/* Button styles */
 button {
   padding: 0.5rem 1rem;
   border: none;
@@ -58,53 +66,53 @@ button {
   font-size: 1rem;
   cursor: pointer;
   margin-top: 0.75rem;
-  transition: background-color 0.3s; /* Smooth color transition */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions */
 }
 
 button:hover {
   background-color: #004d40; /* Darker teal on hover */
 }
 
+button:focus {
+  outline: 2px solid #004d40; /* Focus outline for accessibility */
+  outline-offset: 2px;
+}
+
+button:active {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow on click */
+}
+
+/* Map container styling */
 .map-container {
+  margin-top: 1rem;
+  height: 350 px;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Table styling */
+.entries-table {
   margin-top: 1rem;
 }
 
-.map-container .leaflet-container {
-  height: 300px; /* Adjust map height as needed */
-  border-radius: 8px;
-}
-
-input[readOnly] {
-  background-color: #e0f7fa; /* Light blue background for read-only input */
-  color: #00796b;
-}
-
-/* Autocomplete styling */
-.location-search-input {
+.entries-table table {
   width: 100%;
-  padding: 0.5rem;
+  border-collapse: collapse;
+}
+
+.entries-table th,
+.entries-table td {
+  padding: 0.75rem; /* Increased padding for better readability */
   border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-  background-color: #ffffff;
+  text-align: left;
 }
 
-.autocomplete-dropdown-container {
-  position: absolute;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  width: calc(100% - 2px); /* Match width with input */
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 1000; /* Ensure dropdown appears above other elements */
+.entries-table th {
+  background-color: #00796b; /* Teal header background */
+  color: #ffffff;
 }
 
-.suggestion-item {
-  padding: 8px;
-  cursor: pointer;
-}
-
-.suggestion-item:hover {
-  background-color: #f0f0f0;
+.entries-table tr:hover {
+  background-color: #f0f0f0; /* Hover effect for rows */
 }

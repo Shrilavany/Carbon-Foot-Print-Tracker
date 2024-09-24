@@ -1,7 +1,9 @@
+/* src/components/Dashboard.css */
+
 .dashboard-container {
   padding: 2rem;
-  background-color: #f0f4f8;
-  font-family: Arial, sans-serif;
+  background-color: #f0f4f8; /* Light background for a clean look */
+  font-family: "Arial", sans-serif;
 }
 
 .dashboard-content {
@@ -10,9 +12,11 @@
 }
 
 .dashboard-title {
-  color: #00796b;
+  color: #00796b; /* Teal color for the title */
   text-align: center;
   margin-bottom: 1rem;
+  font-size: 2rem; /* Increased font size for better visibility */
+  font-weight: bold;
 }
 
 .day-inputs {
@@ -22,38 +26,40 @@
 }
 
 .day-input {
-  background: #ffffff;
+  background: #ffffff; /* White background for each day input */
   padding: 1rem;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 h3 {
-  color: #00796b;
+  color: #00796b; /* Teal color for section headers */
   text-align: center;
   margin-top: 1rem;
+  font-size: 1.25rem; /* Slightly larger font size for emphasis */
 }
 
 .pagination {
-  margin-top: 20px;
+  margin-top: 1.5rem;
   text-align: center;
 }
 
 .page-button {
-  background-color: #06721c;
+  background-color: #06721c; /* Green background for buttons */
   border: none;
   border-radius: 5px;
   margin: 0 5px;
   padding: 10px 15px;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-  position: relative; /* To position the underline */
+  position: relative; /* For positioning the underline */
+  color: white;
+  font-size: 1rem;
 }
 
 .page-button.active {
-  background-color: #007bff;
-  color: white;
-  transform: scale(1.1); /* Slightly enlarge the active page button */
+  background-color: #007bff; /* Blue color for the active button */
+  transform: scale(1.1); /* Slightly enlarge the active button */
 }
 
 .page-button.active::after {
@@ -62,11 +68,15 @@ h3 {
   height: 2px;
   background-color: #007bff;
   position: absolute;
-  bottom: -5px; /* Adjust as needed */
+  bottom: -5px; /* Position the underline */
   left: 0;
   right: 0;
 }
 
 .page-button:hover {
-  background-color: #e0e0e0;
+  background-color: #004d40; /* Darker shade for hover effect */
+}
+
+.page-button:focus {
+  outline: 3px solid #007bff; /* Focus outline for accessibility */
 }

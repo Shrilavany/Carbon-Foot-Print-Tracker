@@ -1,0 +1,54 @@
+.activities-page {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.tip-container {
+  margin-top: 20px;
+}
+
+.tip-container h2 {
+  font-size: 24px;
+  color: #2c3e50;
+}
+
+.tip-container p {
+  font-size: 18px;
+  color: #34495e;
+  margin: 15px 0;
+}
+
+.tip-gif {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  border-radius: 10px;
+}
+
+.next-tip-button {
+  margin-top: 20px;
+  margin-bottom: 15px; /* Space below the button */
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.back-button {
+  margin-top: 10px; /* Add space above the back button */
+  padding: 10px 20px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background-color: #c0392b;
+}

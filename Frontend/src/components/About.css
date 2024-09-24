@@ -1,62 +1,179 @@
-/* About.css */
-
-/* Background color for the entire About section */
+/* Background styling for the entire About section */
 .About {
   text-align: center;
   padding: 2rem;
   max-width: 900px;
   margin: 0 auto;
-  background-color: #ffffff; /* White background for clarity */
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  font-family: Arial, sans-serif;
+  background-color: rgba(
+    224,
+    197,
+    237,
+    0.8
+  ); /* Lighter semi-transparent background */
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Enhanced shadow for better depth */
+  font-family: "Arial", sans-serif;
+  position: relative; /* Required for absolute positioning of the corner button */
 }
 
 /* Styling for the heading */
 .About h1 {
   color: #2c3e50; /* Dark grayish-blue for readability and professionalism */
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   margin-bottom: 1.5rem;
   font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
 }
 
 /* Styling for paragraphs */
 .About p {
   font-size: 1.125rem;
-  line-height: 1.6;
+  line-height: 1.8;
   color: #34495e; /* Slightly lighter grayish-blue for text */
   margin-bottom: 1.5rem;
+  font-weight: 500;
 }
 
-/* Additional styling for the last paragraph */
-.About p:last-of-type {
-  margin-bottom: 0;
+/* Styling for images */
+.step-image {
+  max-width: 60%; /* Decrease max width for better user experience */
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add some shadow to the image */
 }
 
-/* Styling for the back button */
-.back-button {
-  background-color: #007bff; /* Blue background to match the nav bar */
-  color: white;
+/* Styling for spoken content */
+.spoken-content {
+  margin-top: 1rem;
+  font-size: 1rem; /* Adjust font size as needed */
+  color: #34495e; /* Match the text color with paragraphs */
+}
+
+/* Buttons container */
+.buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Base styling for all buttons */
+.buttons button {
   border: none;
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 1.75rem;
   font-size: 1rem;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-  margin-top: 2rem; /* Space from the content above */
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Add transition for hover effect */
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Button shadow */
+}
+
+/* Styling for the next step button */
+.next-step-button {
+  background-color: #6c5ce7; /* Purple background */
+  color: white;
+}
+
+.next-step-button:hover {
+  background-color: #4e44c5; /* Darker purple on hover */
+  transform: scale(1.05); /* Slight scaling on hover */
+}
+
+/* Styling for the toggle speech button */
+.toggle-speech-button {
+  background-color: #2ecc71; /* Green background */
+  color: white;
+}
+
+.toggle-speech-button:hover {
+  background-color: #27ae60; /* Darker green on hover */
+  transform: scale(1.05); /* Slight scaling on hover */
+}
+
+/* Additional styling for the back button */
+.back-button {
+  background-color: #d42a7f; /* Pink background */
+  color: white;
 }
 
 .back-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #b72266; /* Darker pink on hover */
+  transform: scale(1.05); /* Slight scaling on hover */
 }
 
-/* Responsive design adjustments for smaller screens */
+/* Top-right button styling */
+.top-corner-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 0.5rem 1rem;
+  background-color: #f39c12; /* Orange color for visibility */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Button shadow */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Add transition effect */
+}
+
+.top-corner-button:hover {
+  background-color: #e67e22; /* Darker orange on hover */
+  transform: scale(1.05); /* Slight scaling on hover */
+}
+
+/* Responsive design for smaller screens */
 @media (max-width: 768px) {
   .About h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 
   .About p {
     font-size: 1rem;
+  }
+
+  /* Adjust button padding for smaller screens */
+  .buttons button {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.875rem;
+  }
+
+  .top-corner-button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Responsive design for extra-small screens */
+@media (max-width: 480px) {
+  .About h1 {
+    font-size: 1.8rem;
+  }
+
+  .About p {
+    font-size: 0.9rem;
+  }
+
+  .step-image {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Adjust button layout for extra small screens */
+  .buttons {
+    flex-direction: column;
+  }
+
+  .buttons button {
+    margin-bottom: 0.75rem;
+    width: 100%;
+  }
+
+  .top-corner-button {
+    padding: 0.5rem;
+    font-size: 0.75rem;
   }
 }

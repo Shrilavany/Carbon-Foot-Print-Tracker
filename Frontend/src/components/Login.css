@@ -1,30 +1,42 @@
-/* Login.css */
-
-/* Container for the login page */
+/* Container for the login page with glassic effect */
 .login-page {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #e0f7fa; /* Light blue background for a calming effect */
+  background: url("https://i.pinimg.com/736x/3b/8d/74/3b8d748916c1398e2e7a61d63d8111ef.jpg")
+    no-repeat center center; /* Optional: Dark background image */
+  background-size: cover; /* Cover the entire container */
   font-family: Arial, sans-serif;
+  position: relative;
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
-/* Box for the login form */
+/* Box for the login form with glassic effect */
 .login-box {
-  background: #ffffff; /* White background for the form */
+  background: rgba(255, 255, 255, 0.3); /* Semi-transparent white background */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Optional: border to enhance the effect */
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
   max-width: 400px;
   width: 100%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+  margin: 0 auto;
 }
 
 /* Heading styling */
 .login-box h2 {
   margin-bottom: 1.5rem;
-  color: #00796b; /* Teal color for a calming and professional look */
+  color: #081311; /* Teal color for a calming and professional look */
+  font-size: 1.5rem; /* Slightly larger font size for the heading */
 }
 
 /* Input fields styling */
@@ -35,6 +47,7 @@
   margin-bottom: 1rem;
   border: 1px solid #ddd;
   border-radius: 4px;
+  box-sizing: border-box;
 }
 
 /* Styling for gender options */
@@ -65,28 +78,108 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 1rem;
+  margin-top: 1rem;
+  width: 100%;
 }
 
 .login-box button:hover {
   background: #004d40; /* Darker teal on hover */
 }
 
-/* Responsive design adjustments for smaller screens */
-@media (max-width: 768px) {
-  .login-box {
-    padding: 1rem;
-  }
+/* Container for buttons alignment */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
 
-  .login-box h2 {
-    font-size: 1.5rem;
-  }
+/* Sign In button styling */
+.sign-in-button {
+  background: #00796b; /* Match the color with your form */
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+}
 
-  .login-box input,
-  .login-box select {
-    font-size: 0.875rem;
-  }
+.sign-in-button:hover {
+  background: #004d40; /* Darker teal on hover */
+}
 
-  .login-box button {
-    font-size: 0.875rem;
-  }
+/* Modal container */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal content styling */
+.modal-content {
+  background: rgba(255, 255, 255, 0.3); /* Semi-transparent white background */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Optional: border to enhance the effect */
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Modal heading styling */
+.modal-content h3 {
+  margin-bottom: 1.5rem;
+  color: #00796b; /* Match the color with your form */
+  font-size: 1.5rem; /* Slightly larger font size for the heading */
+}
+
+/* Inputs in modal */
+.modal-content input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Button in the modal */
+.modal-content button {
+  background: #00796b; /* Match the color with your form */
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 0.5rem;
+}
+
+.modal-content button:hover {
+  background: #004d40; /* Darker teal on hover */
+}
+
+/* Close button styling */
+.modal-close-button {
+  background: #d32f2f; /* Red color for the close button */
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-close-button:hover {
+  background: #b71c1c; /* Darker red on hover */
 }

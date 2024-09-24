@@ -1,8 +1,10 @@
 // src/components/Profile.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./Profile.css"; // Include the CSS for styling
 
 const Profile = () => {
+  const navigate = useNavigate(); // Create navigate function
   const [userData, setUserData] = useState({
     username: "",
     email: "",
@@ -12,6 +14,7 @@ const Profile = () => {
   });
 
   const [profileImage, setProfileImage] = useState(null);
+  const fileInputRef = useRef(null); // Ref for the file input
 
   useEffect(() => {
     // Fetch user data from localStorage
@@ -50,6 +53,17 @@ const Profile = () => {
     }
   };
 
+  const handleEditProfile = () => {
+    // Trigger file input click
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleBack = () => {
+    navigate("/home"); // Navigate to the home page
+  };
+
   return (
     <div className="profile-page">
       <h1>Profile</h1>
@@ -67,6 +81,7 @@ const Profile = () => {
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
+            ref={fileInputRef} // Attach the ref here
             style={{ display: "none" }}
           />
         </div>
@@ -85,7 +100,12 @@ const Profile = () => {
         <p>
           <strong>Gender:</strong> {userData.gender}
         </p>
-        <button className="edit-button">Edit Profile</button>
+        <button className="edit-button" onClick={handleEditProfile}>
+          Edit Profile
+        </button>
+        <button className="back-button" onClick={handleBack}>
+          Back to Home
+        </button>
       </div>
     </div>
   );

@@ -2,19 +2,19 @@
 body {
   margin: 0;
   font-family: "Arial", sans-serif;
-  background-color: #f0f2f5; /* Light background */
+  background-color: #cee1fc; /* Light background */
 }
 
 /* Navigation Bar */
 nav {
   width: 100%;
-  background-color: #007bff; /* Blue background for nav */
-  padding: 1rem 0; /* Adjusted padding to ensure full width */
+  background-color: #3e6311; /* Blue background for nav */
+  padding: 1rem 2rem; /* Adjusted padding */
   position: fixed; /* Make the nav fixed to the top */
   top: 0; /* Position it at the top */
   left: 0; /* Start from the left */
   z-index: 1000; /* Ensure it stays above other content */
-  height: 10px;
+  height: 15px; /* Adjusted height for better visibility */
 }
 
 nav ul {
@@ -43,39 +43,42 @@ nav a:hover {
 /* Home Page Content */
 .home-page {
   text-align: center;
-  padding: 8rem 2rem 2rem; /* Increased top padding to create space for the fixed nav */
+  padding: 6rem 2rem 2rem; /* Adjusted top padding to create space for the fixed nav */
   box-sizing: border-box; /* Include padding in the element's total width and height */
 }
 
+/* Welcome Heading */
 .home-page h1 {
   color: #333;
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  margin-top: 1.5rem;
+  font-size: 2.5rem; /* Increased font size for better visibility */
+  margin-bottom: 2rem; /* Increased margin for more spacing */
 }
 
 /* Carbon Footprint Content */
+/* Carbon Footprint Content with Glassic Effect */
 .carbon-footprint-content {
-  background-color: #fff;
-  padding: 1rem; /* Decreased padding */
-  border-radius: 5px; /* Decreased border-radius for less rounded corners */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  max-width: 600px;
+  background: rgba(177, 172, 172, 0.2); /* Semi-transparent white background */
+  padding: 2rem; /* Increased padding for better spacing */
+  border-radius: 10px; /* Larger border-radius for a softer look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+  max-width: 800px; /* Increased max-width for larger content area */
   margin: 0 auto 2rem;
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 1.125rem; /* Slightly larger font size for better readability */
+  line-height: 1.6; /* Increased line height for improved readability */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Optional: Light border for more definition */
 }
 
 /* Start Tracking Button */
 button {
-  background-color: #28a745; /* Green background */
+  background-color: #0c4519; /* Green background */
   color: white;
   border: none; /* No border */
-  padding: 0.5rem 1rem; /* Adjusted padding for a smaller button */
-  font-size: 0.875rem; /* Smaller font size */
+  padding: 0.75rem 1.5rem; /* Increased padding for a larger button */
+  font-size: 1rem; /* Increased font size for better visibility */
   cursor: pointer;
-  border-radius: 3px; /* Smaller border-radius */
-  transition: background-color 0.3s;
+  border-radius: 5px; /* Larger border-radius for a rounded button */
+  transition: background-color 0.3s, transform 0.3s; /* Added transition for scaling effect */
 }
 
 button a {
@@ -85,4 +88,84 @@ button a {
 
 button:hover {
   background-color: #218838; /* Darker green on hover */
+  transform: scale(1.05); /* Slight scaling effect on hover */
+}
+
+/* Scrolling Container with Glassic Effect */
+.scrolling-container {
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+  margin-top: 2rem;
+  height: 200px; /* Adjust height to fit images */
+  display: flex;
+  align-items: center; /* Center align items vertically */
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+.scrolling-content {
+  display: flex; /* Use flex to lay out images in a row */
+  animation: scroll 30s linear infinite; /* Increased duration for slower scrolling */
+  white-space: nowrap; /* Prevent wrapping */
+}
+
+.scrolling-container.paused .scrolling-content {
+  animation-play-state: paused; /* Pause the scrolling animation when .paused class is added */
+}
+
+.scrolling-content img {
+  display: block;
+  width: 200px; /* Adjust width of images as needed */
+  height: auto;
+  margin: 0 1rem; /* Adjust spacing between images */
+}
+
+/* Keyframes for continuous scrolling */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(
+      -100%
+    ); /* Adjust based on the total width of your images */
+  }
+}
+
+/* Selected Image */
+.selected-image {
+  position: fixed; /* Fix to the screen */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  padding: 1rem;
+  border-radius: 8px;
+  z-index: 1000; /* Ensure it stays above other content */
+}
+
+.selected-image img {
+  max-width: 90vw; /* Ensure image fits within the viewport */
+  max-height: 80vh; /* Ensure image fits within the viewport */
+  border-radius: 8px;
+}
+
+.selected-image button {
+  display: block;
+  margin: 1rem auto 0;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #ff5733; /* Close button color */
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.selected-image button:hover {
+  background-color: #c70039; /* Darker color on hover */
 }

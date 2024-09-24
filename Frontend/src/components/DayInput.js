@@ -1,8 +1,15 @@
 import React, { useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  Polyline,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import "./DayInput.css";
+import L from "leaflet";
 import { useNavigate } from "react-router-dom";
+import "./DayInput.css";
 
 // Geocoding API key
 const GEOCODING_API_KEY = "3b5a792b10f14e248d8e19fe34f0fa46"; // Replace with your API key
@@ -20,53 +27,14 @@ const vehicleBrands = {
 
 const fuelTypes = ["Petrol", "Diesel", "Electric", "CNG", "Jet Fuel"]; // Adding "Jet Fuel" for flights
 
-const cities = [
-  "Chennai",
-  "Coimbatore",
-  "Madurai",
-  "Tiruchirappalli (Trichy)",
-  "Salem",
-  "Tirunelveli",
-  "Vellore",
-  "Erode",
-  "Dindigul",
-  "Thanjavur",
-  "Tiruppur",
-  "Nagercoil",
-  "Cuddalore",
-  "Karur",
-  "Kanchipuram",
-  "Dharmapuri",
-  "Hosur",
-  "Sivakasi",
-  "Nagapattinam",
-  "Ramanathapuram",
-  "Karaikudi",
-  "Perambalur",
-  "Virudhunagar",
-  "Ariyalur",
-  "Tiruvannamalai",
-  "Viluppuram",
-  "Pudukkottai",
-  "Thoothukudi (Tuticorin)",
-  "Namakkal",
-  "Ooty (Udhagamandalam)",
-  "Yercaud",
-  "Kovalam",
-  "Kanyakumari",
-  "Mettur",
-  "Sankarankoil",
-  "Tirupattur",
-  "Vadalur",
-  "Kumbakonam",
-];
+const cities = ["Chennai", "Coimbatore", "Salem", "Vellore"];
 
 const cityLocations = {
   Chennai: [
     "Egmore",
     "Chetpet",
     "Nungambakkam",
-    "T. Nagar (Thyagaraya Nagar)",
+    "T-Nagar",
     "Mount Road (Anna Salai)",
     "Chennai Central",
     "Chennai Egmore",
@@ -103,10 +71,44 @@ const cityLocations = {
     "Valluvar Kottam",
     "Guindy National Park",
     "Chennai Citi Centre",
-    "Poonamallee", // Added Poonamallee
-    "Porur", // Added Porur
+    "Poonamallee",
+    "Porur",
   ],
-  // Add mappings for other cities as needed
+  Coimbatore: [
+    "Coimbatore Junction",
+    "Coimbatore North",
+    "R.S. Puram",
+    "Gandhipuram",
+    "Peelamedu",
+    "Singanallur",
+    "Tidel Park",
+    "Kovai Pudur",
+    "Saibaba Colony",
+    "Ukkadam",
+  ],
+  Salem: [
+    "Salem New Bus Stand",
+    "Salem Junction Railway Station",
+    "Hasthampatti",
+    "Old Bus Stand Area",
+    "Anna Park",
+    "Gandhi Stadium",
+    "Five Roads Junction",
+    "Omalur",
+    "Kuranguchavadi",
+  ],
+  Vellore: [
+    "Katpadi",
+    "Sathuvachari",
+    "Gandhinagar",
+    "Thorapadi",
+    "Arcot",
+    "Gudiyatham",
+    "Ranipet",
+    "Bagayam",
+    "Vaniyambadi",
+    "Ambur",
+  ],
 };
 
 const DayInput = ({ day, updateDayData }) => {
@@ -125,7 +127,24 @@ const DayInput = ({ day, updateDayData }) => {
   });
 
   const [locationOptions, setLocationOptions] = useState([]);
-  const navigate = useNavigate(); // Hook to navigate programmatically
+  const navigate = useNavigate();
+
+  // Define custom icons
+  const startIcon = new L.Icon({
+    iconUrl:
+      "https://i.pinimg.com/564x/fb/3c/f6/fb3cf6d050330195ca80b47fab2f4606.jpg",
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  });
+
+  const endIcon = new L.Icon({
+    iconUrl:
+      "https://i.pinimg.com/564x/8b/0b/2a/8b0b2aabaacab763e62b8c4ecbac389a.jpg",
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  });
 
   const handleInputChange = (field, value) => {
     setCurrentEntry((prevEntry) => ({
@@ -137,14 +156,14 @@ const DayInput = ({ day, updateDayData }) => {
   const handleCityChange = (e) => {
     const city = e.target.value;
     handleInputChange("city", city);
-    setLocationOptions(cityLocations[city] || []); // Set locations based on selected city
-    handleInputChange("startLocationName", ""); // Reset location names
+    setLocationOptions(cityLocations[city] || []);
+    handleInputChange("startLocationName", "");
     handleInputChange("endLocationName", "");
   };
 
   const handleVehicleTypeChange = (e) => {
     handleInputChange("vehicleType", e.target.value);
-    handleInputChange("vehicleBrand", ""); // Reset brand when vehicle type changes
+    handleInputChange("vehicleBrand", "");
   };
 
   const handleAddEntry = () => {
@@ -219,7 +238,8 @@ const DayInput = ({ day, updateDayData }) => {
 
   const haversineDistance = (lat1, lon1, lat2, lon2) => {
     const toRadians = (degrees) => degrees * (Math.PI / 180);
-    const R = 6371; // Radius of the Earth in km
+
+    const R = 6371;
     const dLat = toRadians(lat2 - lat1);
     const dLon = toRadians(lon2 - lon1);
     const a =
@@ -229,185 +249,250 @@ const DayInput = ({ day, updateDayData }) => {
         Math.sin(dLon / 2) *
         Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c; // Distance in km
+    return R * c;
   };
 
-  const calculateEmission = (vehicleType, fuelType, kilometers) => {
+  const calculateEmission = (vehicleType, fuelType, distance) => {
     const emissionFactors = {
-      Car: { Petrol: 0.2, Diesel: 0.25, Electric: 0, CNG: 0.15 },
-      Bike: { Petrol: 0.1, Diesel: 0.12, Electric: 0, CNG: 0.08 },
-      Scooter: { Petrol: 0.12, Diesel: 0.15, Electric: 0, CNG: 0.1 },
-      Auto: { Petrol: 0.15, Diesel: 0.2, Electric: 0, CNG: 0.12 },
-      Truck: { Petrol: 0.4, Diesel: 0.5, Electric: 0, CNG: 0.35 },
-      Bus: { Petrol: 0.3, Diesel: 0.4, Electric: 0, CNG: 0.25 },
-      Flight: { Jet_Fuel: 0.9 }, // Example factor for flights
+      Car: { Petrol: 2.31, Diesel: 2.68, Electric: 0, CNG: 1.88, JetFuel: 0 },
+      Bike: { Petrol: 1.36, Diesel: 0, Electric: 0, CNG: 1.3, JetFuel: 0 },
+      Scooter: { Petrol: 1.46, Diesel: 0, Electric: 0, CNG: 1.5, JetFuel: 0 },
+      Auto: { Petrol: 1.55, Diesel: 2.4, Electric: 0, CNG: 1.88, JetFuel: 0 },
+      Truck: { Petrol: 2.68, Diesel: 3.0, Electric: 0, CNG: 2.55, JetFuel: 0 },
+      Bus: { Petrol: 2.5, Diesel: 2.5, Electric: 0, CNG: 2.7, JetFuel: 0 },
+      "MTC Bus": {
+        Petrol: 2.5,
+        Diesel: 2.5,
+        Electric: 0,
+        CNG: 2.7,
+        JetFuel: 0,
+      },
+      Flight: { Petrol: 0, Diesel: 0, Electric: 0, CNG: 0, JetFuel: 2.5 },
     };
 
-    return (
-      (emissionFactors[vehicleType] && emissionFactors[vehicleType][fuelType]
-        ? emissionFactors[vehicleType][fuelType]
-        : 0) * kilometers
-    ).toFixed(2);
+    const factor = emissionFactors[vehicleType]?.[fuelType] || 0;
+    return (factor * distance).toFixed(2);
+  };
+
+  const handleSubmit = () => {
+    if (entries.length > 0) {
+      updateDayData(day, entries);
+      navigate("/results", { state: { entries } });
+    } else {
+      alert("Please add at least one entry.");
+    }
   };
 
   return (
     <div className="day-input-container">
-      <h2>Day {day} Input</h2>
+      <div className="entries-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Vehicle Type</th>
+              <th>Vehicle Brand</th>
+              <th>Fuel Type</th>
+              <th>Start Location</th>
+              <th>End Location</th>
+              <th>Start Time</th>
+              <th>Kilometers</th>
+              <th>Emission (kg CO2)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {entries.map((entry, index) => (
+              <tr key={index}>
+                <td>{entry.vehicleType}</td>
+                <td>{entry.vehicleBrand}</td>
+                <td>{entry.fuelType}</td>
+                <td>{entry.startLocationName}</td>
+                <td>{entry.endLocationName}</td>
+                <td>{entry.startTime}</td>
+                <td>{entry.kilometers}</td>
+                <td>{entry.emission}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      <label>
-        Select City:
-        <select value={currentEntry.city} onChange={handleCityChange}>
-          <option value="">Select a city</option>
-          {cities.map((city) => (
-            <option key={city} value={city}>
-              {city}
-            </option>
-          ))}
-        </select>
-      </label>
+      <div className="input-form">
+        <h3>Day {day} Input</h3>
 
-      <label>
-        Vehicle Type:
-        <select
-          value={currentEntry.vehicleType}
-          onChange={handleVehicleTypeChange}
-        >
-          <option value="">Select a vehicle type</option>
-          {Object.keys(vehicleBrands).map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
-      </label>
-
-      {currentEntry.vehicleType && (
-        <label>
-          Vehicle Brand:
+        <div>
+          <label>City:</label>
           <select
-            value={currentEntry.vehicleBrand}
-            onChange={(e) => handleInputChange("vehicleBrand", e.target.value)}
+            value={currentEntry.city}
+            onChange={handleCityChange}
+            required
           >
-            <option value="">Select a brand</option>
-            {vehicleBrands[currentEntry.vehicleType].map((brand) => (
-              <option key={brand} value={brand}>
-                {brand}
+            <option value="">Select City</option>
+            {cities.map((city) => (
+              <option key={city} value={city}>
+                {city}
               </option>
             ))}
           </select>
-        </label>
-      )}
+        </div>
 
-      {currentEntry.vehicleType && (
-        <label>
-          Fuel Type:
+        <div>
+          <label>Start Location:</label>
+          <select
+            value={currentEntry.startLocationName}
+            onChange={(e) =>
+              handleInputChange("startLocationName", e.target.value)
+            }
+            required
+          >
+            <option value="">Select Start Location</option>
+            {locationOptions.map((location) => (
+              <option
+                key={location}
+                value={`${currentEntry.city}, ${location}`}
+              >
+                {location}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label>End Location:</label>
+          <select
+            value={currentEntry.endLocationName}
+            onChange={(e) =>
+              handleInputChange("endLocationName", e.target.value)
+            }
+            required
+          >
+            <option value="">Select End Location</option>
+            {locationOptions.map((location) => (
+              <option
+                key={location}
+                value={`${currentEntry.city}, ${location}`}
+              >
+                {location}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label>Vehicle Type:</label>
+          <select
+            value={currentEntry.vehicleType}
+            onChange={handleVehicleTypeChange}
+            required
+          >
+            <option value="">Select Vehicle Type</option>
+            {Object.keys(vehicleBrands).map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {currentEntry.vehicleType && (
+          <div>
+            <label>Vehicle Brand:</label>
+            <select
+              value={currentEntry.vehicleBrand}
+              onChange={(e) =>
+                handleInputChange("vehicleBrand", e.target.value)
+              }
+              required
+            >
+              <option value="">Select Vehicle Brand</option>
+              {vehicleBrands[currentEntry.vehicleType].map((brand) => (
+                <option key={brand} value={brand}>
+                  {brand}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        <div>
+          <label>Fuel Type:</label>
           <select
             value={currentEntry.fuelType}
             onChange={(e) => handleInputChange("fuelType", e.target.value)}
+            required
           >
-            <option value="">Select a fuel type</option>
-            {fuelTypes.map((fuel) => (
-              <option key={fuel} value={fuel}>
-                {fuel}
+            <option value="">Select Fuel Type</option>
+            {fuelTypes.map((type) => (
+              <option key={type} value={type}>
+                {type}
               </option>
             ))}
           </select>
-        </label>
-      )}
-
-      <label>
-        Start Location:
-        <select
-          value={currentEntry.startLocationName}
-          onChange={(e) =>
-            handleInputChange("startLocationName", e.target.value)
-          }
-        >
-          <option value="">Select a start location</option>
-          {locationOptions.map((location) => (
-            <option key={location} value={location}>
-              {location}
-            </option>
-          ))}
-        </select>
-      </label>
-
-      <label>
-        End Location:
-        <select
-          value={currentEntry.endLocationName}
-          onChange={(e) => handleInputChange("endLocationName", e.target.value)}
-        >
-          <option value="">Select an end location</option>
-          {locationOptions.map((location) => (
-            <option key={location} value={location}>
-              {location}
-            </option>
-          ))}
-        </select>
-      </label>
-
-      <button onClick={handleCalculateDistance}>Calculate Distance</button>
-      <button onClick={handleAddEntry}>Add Entry</button>
-
-      {entries.length > 0 && (
-        <div className="entries-list">
-          <h3>Entries</h3>
-          <ul>
-            {entries.map((entry, index) => (
-              <li key={index}>
-                <strong>Entry {index + 1}</strong>
-                <br />
-                Vehicle Type: {entry.vehicleType}
-                <br />
-                Vehicle Brand: {entry.vehicleBrand}
-                <br />
-                Fuel Type: {entry.fuelType}
-                <br />
-                Start Location: {entry.startLocationName} (Lat:{" "}
-                {entry.startLocation?.lat}, Lng: {entry.startLocation?.lng})
-                <br />
-                End Location: {entry.endLocationName} (Lat:{" "}
-                {entry.endLocation?.lat}, Lng: {entry.endLocation?.lng})<br />
-                Distance: {entry.kilometers} km
-                <br />
-                Emission: {entry.emission} kg CO2
-              </li>
-            ))}
-          </ul>
         </div>
-      )}
 
-      <MapContainer
-        center={[13.0827, 80.2707]} // Updated to center around Chennai
-        zoom={12}
-        style={{ height: "400px", width: "100%" }}
-      >
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        />
-        {entries.map((entry, index) => (
-          <>
-            {entry.startLocation && (
-              <Marker
-                key={`start-${index}`}
-                position={[entry.startLocation.lat, entry.startLocation.lng]}
-              >
-                <Popup>Start Location: {entry.startLocationName}</Popup>
-              </Marker>
-            )}
-            {entry.endLocation && (
-              <Marker
-                key={`end-${index}`}
-                position={[entry.endLocation.lat, entry.endLocation.lng]}
-              >
-                <Popup>End Location: {entry.endLocationName}</Popup>
-              </Marker>
-            )}
-          </>
-        ))}
-      </MapContainer>
+        <div>
+          <label>Start Time:</label>
+          <input
+            type="time"
+            value={currentEntry.startTime}
+            onChange={(e) => handleInputChange("startTime", e.target.value)}
+            required
+          />
+        </div>
+
+        <div>
+          <button onClick={handleCalculateDistance}>Calculate Distance</button>
+        </div>
+
+        <div>
+          <label>Kilometers:</label>
+          <input
+            type="number"
+            value={currentEntry.kilometers}
+            onChange={(e) => handleInputChange("kilometers", e.target.value)}
+            readOnly
+          />
+        </div>
+
+        <div>
+          <button onClick={handleAddEntry}>Add Entry</button>
+        </div>
+      </div>
+
+      <div className="map-container">
+        {currentEntry.startLocation && currentEntry.endLocation && (
+          <MapContainer
+            center={[
+              currentEntry.startLocation.lat,
+              currentEntry.startLocation.lng,
+            ]}
+            zoom={13}
+            style={{ height: "300px", width: "100%" }}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            <Marker position={currentEntry.startLocation} icon={startIcon}>
+              <Popup>Start Location</Popup>
+            </Marker>
+            <Marker position={currentEntry.endLocation} icon={endIcon}>
+              <Popup>End Location</Popup>
+            </Marker>
+            <Polyline
+              positions={[
+                [
+                  currentEntry.startLocation.lat,
+                  currentEntry.startLocation.lng,
+                ],
+                [currentEntry.endLocation.lat, currentEntry.endLocation.lng],
+              ]}
+              color="blue"
+            />
+          </MapContainer>
+        )}
+      </div>
+
+      <button onClick={handleSubmit}>Submit Day {day} Data</button>
     </div>
   );
 };

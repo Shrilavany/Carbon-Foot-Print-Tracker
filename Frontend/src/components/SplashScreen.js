@@ -7,7 +7,7 @@ import backgroundImage from "../assets/images/background-image2.jpg"; // Import 
 
 const SplashScreen = () => {
   const navigate = useNavigate();
-  const [countdown, setCountdown] = useState(3); // Initialize countdown state to 3
+  const [countdown, setCountdown] = useState(5); // Initialize countdown state to 5
 
   useEffect(() => {
     // Function to handle AI speech
@@ -26,7 +26,7 @@ const SplashScreen = () => {
       setCountdown((prevCountdown) => {
         const newCountdown = prevCountdown - 1;
 
-        // Only speak when the number is 3, 2, or 1
+        // Only speak when the number is 5, 4, 3, 2, or 1
         if (newCountdown > 0) {
           speakNumber(newCountdown);
         }
@@ -35,10 +35,10 @@ const SplashScreen = () => {
       });
     }, 1000);
 
-    // After 3 seconds, navigate to /login
+    // After 5 seconds, navigate to /login
     const timer = setTimeout(() => {
       navigate("/login");
-    }, 3000); // Redirect after 3 seconds
+    }, 5000); // Redirect after 5 seconds
 
     return () => {
       clearInterval(interval); // Clean up interval on component unmount
@@ -53,8 +53,16 @@ const SplashScreen = () => {
       role="img"
       aria-label="Splash screen background"
     >
-      <h1>Carbon Footprint Tracker</h1>
-      <div className="countdown">{countdown}</div> {/* Display countdown */}
+      <div className="glass-panel">
+        <h1>Carbon Footprint Tracker</h1>
+        <div className="countdown">{countdown}</div> {/* Display countdown */}
+        <div className="progress-bar">
+          <div
+            className="progress"
+            style={{ width: `${(5 - countdown) * 20}%` }}
+          ></div>
+        </div>
+      </div>
     </div>
   );
 };
